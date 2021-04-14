@@ -21,7 +21,7 @@ public class vendingList {
 
 		try {
 
-			String quary = "SELECT * FROM (SELECT * FROM JAPAN ORDER BY DBMS_RANDOM.RANDOM) WHERE ROWNUM <= 10";
+			String quary = "SELECT * FROM STOCK";
 
 			conn = connection.getConnection();
 

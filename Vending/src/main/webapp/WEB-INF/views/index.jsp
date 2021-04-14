@@ -7,10 +7,17 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style/style.css">
+  <link rel="stylesheet" href="css/style.css">
   <title>VendingMachine</title>
 </head>
 <body>
+<c:forEach var="Test" items="${list}">
+<tr>
+<td>${Test.item_Number}</td>
+<td>${Test.item_Quantity}</td>
+<td>${Test.max_Item_Quantity}</td>
+</tr>
+</c:forEach>
 	<div class="container">
 		<div class="vending-machine">
 			<div class="display-board">

@@ -9,8 +9,8 @@ public class connection {
 	public static Connection getConnection() {
 		Connection conn = null;
 		try {
-			String user = "아이디";
-			String pw = "비밀번호";
+			String user = "scott";
+			String pw = "4568";
 			String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 
 			Class.forName("oracle.jdbc.driver.OracleDriver");
