@@ -88,5 +88,12 @@
     height: 200px;
 }
 .casher{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 272px;
 }
+.casher-popup{
+    display: inline-block;
+}
+
