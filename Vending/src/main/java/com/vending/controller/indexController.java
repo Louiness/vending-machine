@@ -1,5 +1,7 @@
 package com.vending.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,13 @@ public class indexController {
 		model.addAttribute("list", resultList.getvendingList());
 
 		return "index";
+	}
+	
+	@RequestMapping(value = "/purchase", method = RequestMethod.GET)
+	public boolean plag(Model model, String productNumber) {
+		
+
+		return false;
 	}
 	
 }

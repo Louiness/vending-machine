@@ -20,10 +20,10 @@ public class vendingJson {
 
 		JSONObject obj = new JSONObject();
 
-		obj.put("soldOutPlag", vending.getsoldOutPlag());
+		//obj.put("soldOutPlag", vending.getsoldOutPlag());
 
 		// 테스트용 출력
-		System.out.println(json);
+		//System.out.println(json);
 
 		// System.out.println(arr.toJSONString());
 	}
