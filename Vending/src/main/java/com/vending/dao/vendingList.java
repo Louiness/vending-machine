@@ -16,12 +16,11 @@ public class vendingList {
 
 	List<vendingVO> vendingList = new ArrayList<>();
 
-	/* Testのデイタテストリスト */
 	public List<vendingVO> getvendingList() {
 
 		try {
 
-			String quary = "SELECT * FROM STOCK";
+			String quary = "SELECT A.ITEM_NUMBER, B.PRICE, B.ITEM_IMAGE,CASE WHEN ITEM_QUANTITY <= 0 THEN '1' ELSE '0' END AS SOLDOUTPLAG FROM STOCK A INNER JOIN PRODUCT_INFOMATION B ON (A.ITEM_NUMBER = B.ITEM_NUMBER)";
 
 			conn = connection.getConnection();
 
@@ -31,18 +30,16 @@ public class vendingList {
 
 			while (rs.next()) {
 
-				String item_Number = rs.getString("ITEM_NUMBER");
-				int item_Quantity = rs.getInt("ITEM_QUANTITY");
-				int max_Item_Quantity = rs.getInt("MAX_ITEM_QUANTITY");
-
-				vendingList.add(new vendingVO(item_Number, item_Quantity, max_Item_Quantity));
+				String itemNumber = rs.getString("ITEM_NUMBER");
+				int price = rs.getInt("PRICE");
+				String itemImage = rs.getString("ITEM_IMAGE");
+				Boolean soldOutPlag = rs.getBoolean("SOLDOUTPLAG"); 
+				vendingList.add(new vendingVO(itemNumber, price, itemImage, soldOutPlag));
 
 			}
-
 			return vendingList;
 		} catch (Exception e) {
 			System.out.println("vendingList 에러 발생");
-
 		} finally {
 
 			try {

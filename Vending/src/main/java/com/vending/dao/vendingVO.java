@@ -1,38 +1,47 @@
 package com.vending.dao;
 
 public class vendingVO {
-		String item_Number;
-		int item_Quantity;
-		int max_Item_Quantity;
+		String itemNumber;
+		int price;
+		String itemImage;
+		Boolean soldOutPlag;
 		
-		public vendingVO(String item_Number, int item_Quantity, int max_Item_Quantity) {
-			this.item_Number = item_Number;
-			this.item_Quantity = item_Quantity;
-			this.max_Item_Quantity = max_Item_Quantity;
+		public vendingVO(String itemNumber, int price, String itemImage, Boolean soldOutPlag) {
+			this.itemNumber = itemNumber;
+			this.price = price;
+			this.itemImage = itemImage;
+			this.soldOutPlag = soldOutPlag;
 		}
 
-		public String getItem_Number() {
-			return item_Number;
+		public String getitemNumber() {
+			return itemNumber;
 		}
 
-		public void setItem_Number(String item_Number) {
-			this.item_Number = item_Number;
+		public void setitemNumber(String itemNumber) {
+			this.itemNumber = itemNumber;
 		}
 
-		public int getItem_Quantity() {
-			return item_Quantity;
+		public int getPrice() {
+			return price;
 		}
 
-		public void setItem_Quantity(int item_Quantity) {
-			this.item_Quantity = item_Quantity;
+		public void setPrice(int price) {
+			this.price = price;
 		}
 
-		public int getMax_Item_Quantity() {
-			return max_Item_Quantity;
+		public String getitemImage() {
+			return itemImage;
 		}
 
-		public void setMax_Item_Quantity(int max_Item_Quantity) {
-			this.max_Item_Quantity = max_Item_Quantity;
+		public void setitemImage(String itemImage) {
+			this.itemImage = itemImage;
 		}
-		
+
+		public Boolean getsoldOutPlag() {
+			return soldOutPlag;
+		}
+
+		public void setsoldOutPlag(Boolean soldOutPlag) {
+			this.soldOutPlag = soldOutPlag;
+		}
 }
