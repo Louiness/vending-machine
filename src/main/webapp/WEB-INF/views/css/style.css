@@ -74,6 +74,13 @@
 .items div:nth-child(n) .purchase-button .product-info{
     width: 65%;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.price{
+    position: relative;
+    bottom: 2px;
 }
 .pick-up-area{
     border-right: 1px solid #000000;
@@ -91,9 +98,52 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 272px;
+    flex-wrap: wrap;
+    width: 298px;
+}
+.balance-display{
+    position: relative;
+    top: 50px;
+    border: 1px solid #000000;
+    width: 200px;
+}
+.bill-acceptor{
+    position: relative;
+    top: 50px;
+    border: 1px solid #000000;
+    width: 200px;
+}
+.coin-changer{
+    position: relative;
+    top: 50px;
+    border: 1px solid #000000;
+    width: 200px;
+}
+.coin-insert{
+    position: relative;
+    bottom: 50px;
+    border: 1px solid #000000;
+    width: 200px;
+}
+.coin-return{
+    position: relative;
+    bottom: 100px;
+    border: 1px solid #000000;
+    width: 200px;
 }
 .casher-popup{
+    position: fixed;
+    top: 400px;
+    right: 150px;
+    width: 397px;
+    height: 95px;
     display: inline-block;
+    border: 1px solid #000000;
+    background-color: #FFFFFF;
 }
-
+.casher-popup img{
+    margin: 10px;
+    width: 75px;
+    height: 75px;
+    cursor: pointer;
+}

@@ -1,5 +1,10 @@
 "use strict"
 
+// 동전 투입구
+let coinInsert = document.getElementsByClassName("coin-insert")[0];
+coinInsert.addEventListener("click", () => {
+    
+});
 // 자판기 내에 존재하는 잔액
 let balance = document.getElementsByClassName("balance").innerText;
 
@@ -8,7 +13,7 @@ function init() {
     let coins = document.getElementsByClassName("coin");
 
     for(let coin of coins){
-        coin.children[0].addEventListener("click", () => {
+        coin.addEventListener("click", () => {
             let balanceElement = document.getElementById("balance");
             if(balance === undefined){
                 balance = ZERO;
@@ -17,7 +22,7 @@ function init() {
                 
             }
             // 투입한 금액
-            let coinValue = Number(coin.children[0].getElementById("value").slice(-3));
+            let coinValue = Number(coin.getAttribute("id").replace("yen", ""));
             
             balance = addBalance(coinValue);
             balanceElement.innerText = balance;
