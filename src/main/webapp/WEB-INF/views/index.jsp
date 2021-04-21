@@ -15,120 +15,19 @@
     <div class="vending-machine">
       <div class="display-board">
         <div class="items">
-          <div class="item1">
-            <!-- 제품이미지 설정 -->
-            <img src="" alt="" srcset="">
-            <div class="purchase-button">
-              <div class="product-state">
-                <!-- 매진플래그 설정 -->
-                <input type="hidden" class="sold-out-flag" value=""/>
-              </div>
-              <div class="product-info">
-                <!-- id값에 제품번호를 설정. text에 가격 설정 -->
-                <span id="productNumber1" class="price">1</span>
-              </div>
-            </div>
-          </div>
-          <div class="item2">
-            <img src="" alt="" srcset="">
-            <div class="purchase-button">
-              <div class="product-state">
-                <input type="hidden" class="sold-out-flag" value=""/>
-              </div>
-              <div class="product-info">
-                <span id="productNumber2" class="price">2</span>
+          <c:forEach var="item" items="${list}" varStatus="stat">
+            <div class="item${stat.index}">
+              <img src="${item.itemImage}" alt="" srcset="">
+              <div class="purchase-button">
+                <div class="product-state">
+                  <input type="hidden" class="sold-out-flag" value="${item.soldOutPlag}"/>
+                </div>
+                <div class="product-info">
+                  <span id="${item.itemNumber}" class="price">${item.price}</span>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="item3">
-            <img src="" alt="" srcset="">
-            <div class="purchase-button">
-              <div class="product-state">
-                <input type="hidden" class="sold-out-flag" value=""/>
-              </div>
-              <div class="product-info">
-                <span id="productNumber3" class="price">3</span>
-              </div>
-            </div>
-          </div>
-          <div class="item4">
-            <img src="" alt="" srcset="">
-            <div class="purchase-button">
-              <div class="product-state">
-                <input type="hidden" class="sold-out-flag" value=""/>
-              </div>
-              <div class="product-info">
-                <span id="productNumber4" class="price">4</span>
-              </div>
-            </div>
-          </div>
-          <div class="item5">
-            <img src="" alt="" srcset="">
-            <img src="" alt="" srcset="">
-            <div class="purchase-button">
-              <div class="product-state">
-                <input type="hidden" class="sold-out-flag" value=""/>
-              </div>
-              <div class="product-info">
-                <span id="productNumber5" class="price">5</span>
-              </div>
-            </div>
-          </div>
-          <div class="item6">
-            <img src="" alt="" srcset="">
-            <div class="purchase-button">
-              <div class="product-state">
-                <input type="hidden" class="sold-out-flag" value=""/>
-              </div>
-              <div class="product-info">
-                <span id="productNumber6" class="price">6</span>
-              </div>
-            </div>
-          </div>
-          <div class="item7">
-            <img src="" alt="" srcset="">
-            <div class="purchase-button">
-              <div class="product-state">
-                <input type="hidden" class="sold-out-flag" value=""/>
-              </div>
-              <div class="product-info">
-                <span id="productNumber7" class="price">7</span>
-              </div>
-            </div>
-          </div>
-          <div class="item8">
-            <img src="" alt="" srcset="">
-            <div class="purchase-button">
-              <div class="product-state">
-                <input type="hidden" class="sold-out-flag" value=""/>
-              </div>
-              <div class="product-info">
-                <span id="productNumber8" class="price">8</span>
-              </div>
-            </div>
-          </div>
-          <div class="item9">
-            <img src="" alt="" srcset="">
-            <div class="purchase-button">
-              <div class="product-state">
-                <input type="hidden" class="sold-out-flag" value=""/>
-              </div>
-              <div class="product-info">
-                <span id="productNumber9" class="price">9</span>
-              </div>
-            </div>
-          </div>
-          <div class="item10">
-            <img src="" alt="" srcset="">
-            <div class="purchase-button">
-              <div class="product-state">
-                <input type="hidden" class="sold-out-flag" value=""/>
-              </div>
-              <div class="product-info">
-                <span id="productNumber10" class="price">10</span>
-              </div>
-            </div>
-          </div>
+          </c:forEach>
         </div>
         <div class="pick-up-area">
           <div class="pick-up-box">
