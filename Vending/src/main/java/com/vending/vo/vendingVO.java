@@ -1,4 +1,4 @@
-package com.vending.dao;
+package com.vending.vo;
 
 public class vendingVO {
 		String itemNumber;

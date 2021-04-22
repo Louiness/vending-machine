@@ -1,24 +1,20 @@
 package com.vending.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.vending.dao.vendingList;
+import com.vending.dao.vendingInventory;
+import com.vending.dao.vendingDao;
 
-/**
- * Handles requests for the application home page.
- */
 @Controller
-public class indexController {
+public class vendingController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model model) {
 
-		vendingList resultList = new vendingList();
+		vendingDao resultList = new vendingDao();
 		model.addAttribute("list", resultList.getvendingList());
 
 		return "index";
@@ -27,7 +23,10 @@ public class indexController {
 	@RequestMapping(value = "/purchase", method = RequestMethod.GET)
 	public boolean plag(Model model, String productNumber) {
 		
+//		vendingInventory inventory = new vendingInventory();
 
+//		Boolean test = inventory.getInventory(productNumber);
+		
 		return false;
 	}
 	

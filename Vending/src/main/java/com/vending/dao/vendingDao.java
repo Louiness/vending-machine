@@ -6,7 +6,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class vendingList {
+import com.vending.common.vendingConstant;
+import com.vending.vo.vendingVO;
+
+public class vendingDao {
 
 	Connection conn;
 
@@ -20,7 +23,7 @@ public class vendingList {
 
 		try {
 
-			String quary = "SELECT A.ITEM_NUMBER, B.PRICE, B.ITEM_IMAGE,CASE WHEN ITEM_QUANTITY <= 0 THEN '1' ELSE '0' END AS SOLDOUTPLAG FROM STOCK A INNER JOIN PRODUCT_INFOMATION B ON (A.ITEM_NUMBER = B.ITEM_NUMBER)";
+			String quary = quaryConditionProcess();
 
 			conn = connection.getConnection();
 
@@ -59,4 +62,27 @@ public class vendingList {
 		}
 		return vendingList;
 	}
+	
+	public String quaryConditionProcess() {
+		
+		StringBuilder sb = new StringBuilder();
+
+		String startQuary = "SELECT A.ITEM_NUMBER, B.PRICE, B.ITEM_IMAGE,CASE WHEN ITEM_QUANTITY <= ";
+		String middle1 = " THEN ";
+		String middle2 = " ELSE ";
+		String endQuary = " END AS SOLDOUTPLAG FROM STOCK A INNER JOIN PRODUCT_INFOMATION B ON (A.ITEM_NUMBER = B.ITEM_NUMBER)";
+
+		sb.append(startQuary);
+		sb.append(vendingConstant.ZERO);
+		sb.append(middle1);
+		sb.append(vendingConstant.ONE);
+		sb.append(middle2);
+		sb.append(vendingConstant.ZERO);
+		sb.append(endQuary);
+		
+		return sb.toString();
+
+	}
+	
+	
 }
