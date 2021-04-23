@@ -20,8 +20,8 @@ function init() {
                   //データが正常
                   if(response.soldOutFlag === 'soldout'){
 
-                    productStateDiv.style.backgroundColor = "red";
                     soldOutFlagDiv.setAttribute("value", response.soldOutFlag);
+                    productStateDiv.style.backgroundColor = "red";
                   }
                 }
               }
