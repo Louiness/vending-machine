@@ -22,7 +22,7 @@
             <div class="purchase-button">
               <div class="product-state">
                 <!-- 매진플래그 설정 -->
-                <input type="hidden" class="sold-out-flag" value="${Test.soldOutPlag}"/>
+                <input type="hidden" class="sold-out-flag" value="${Test.soldOutFlag}"/>
               </div>
               <div class="product-info">
                 <!-- id값에 제품번호를 설정. text에 가격 설정 -->

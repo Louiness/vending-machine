@@ -36,8 +36,8 @@ public class vendingDao {
 				String itemNumber = rs.getString("ITEM_NUMBER");
 				int price = rs.getInt("PRICE");
 				String itemImage = rs.getString("ITEM_IMAGE");
-				Boolean soldOutPlag = rs.getBoolean("SOLDOUTPLAG"); 
-				vendingList.add(new vendingVO(itemNumber, price, itemImage, soldOutPlag));
+				String soldOutFlag = rs.getString("SOLDOUTFLAG"); 
+				vendingList.add(new vendingVO(itemNumber, price, itemImage, soldOutFlag));
 
 			}
 			return vendingList;
@@ -68,15 +68,15 @@ public class vendingDao {
 		StringBuilder sb = new StringBuilder();
 
 		String startQuary = "SELECT A.ITEM_NUMBER, B.PRICE, B.ITEM_IMAGE,CASE WHEN ITEM_QUANTITY <= ";
-		String middle1 = " THEN ";
-		String middle2 = " ELSE ";
-		String endQuary = " END AS SOLDOUTPLAG FROM STOCK A INNER JOIN PRODUCT_INFOMATION B ON (A.ITEM_NUMBER = B.ITEM_NUMBER)";
+		String middleQuary1 = " THEN ";
+		String middleQuary2 = " ELSE ";
+		String endQuary = " END AS SOLDOUTFLAG FROM STOCK A INNER JOIN PRODUCT_INFOMATION B ON (A.ITEM_NUMBER = B.ITEM_NUMBER)";
 
 		sb.append(startQuary);
 		sb.append(vendingConstant.ZERO);
-		sb.append(middle1);
+		sb.append(middleQuary1);
 		sb.append(vendingConstant.ONE);
-		sb.append(middle2);
+		sb.append(middleQuary2);
 		sb.append(vendingConstant.ZERO);
 		sb.append(endQuary);
 		

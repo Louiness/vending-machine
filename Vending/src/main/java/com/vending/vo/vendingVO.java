@@ -4,13 +4,13 @@ public class vendingVO {
 		String itemNumber;
 		int price;
 		String itemImage;
-		Boolean soldOutPlag;
+		String soldOutFlag;
 		
-		public vendingVO(String itemNumber, int price, String itemImage, Boolean soldOutPlag) {
+		public vendingVO(String itemNumber, int price, String itemImage, String soldOutFlag) {
 			this.itemNumber = itemNumber;
 			this.price = price;
 			this.itemImage = itemImage;
-			this.soldOutPlag = soldOutPlag;
+			this.soldOutFlag = soldOutFlag;
 		}
 
 		public String getitemNumber() {
@@ -37,11 +37,11 @@ public class vendingVO {
 			this.itemImage = itemImage;
 		}
 
-		public Boolean getsoldOutPlag() {
-			return soldOutPlag;
+		public String getsoldOutFlag() {
+			return soldOutFlag;
 		}
 
-		public void setsoldOutPlag(Boolean soldOutPlag) {
-			this.soldOutPlag = soldOutPlag;
+		public void setsoldOutFlag(String soldOutFlag) {
+			this.soldOutFlag = soldOutFlag;
 		}
 }

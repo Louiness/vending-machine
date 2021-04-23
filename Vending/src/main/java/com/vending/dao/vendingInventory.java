@@ -15,27 +15,29 @@ public class vendingInventory {
 
 	ResultSet rs;
 
-	public Boolean getInventory(String productNumber) {
+	public String getInventory(String productNumber) {
 
-		Boolean soldOutPlag = false;
+		String soldOutFlag = "";
 
 		try {
 
 			String quary = quaryUpdateProcess();
 			conn = connection.getConnection();
-			pstm.setString(1, productNumber);
 			pstm = conn.prepareStatement(quary);
+			pstm.setString(1, productNumber);
 			pstm.executeUpdate();
 
 			quary = quaryConditionProcess();
-			pstm.setString(1, productNumber);
 			pstm = conn.prepareStatement(quary);
+			pstm.setString(1, productNumber);
 			rs = pstm.executeQuery();
-			soldOutPlag = rs.getBoolean("SOLDOUTPLAG");
+
+			while (rs.next()) {
+				soldOutFlag = rs.getString("SOLDOUTFLAG");
+			}
 
 		} catch (SQLException sqle) {
-			System.out.println("JapanUpDate에서 예러 발생");
-
+			sqle.printStackTrace();
 		} finally {
 			// DB 연결을 종료한다.
 			try {
@@ -53,7 +55,7 @@ public class vendingInventory {
 			}
 		}
 
-		return soldOutPlag;
+		return soldOutFlag;
 
 	}
 
@@ -63,7 +65,7 @@ public class vendingInventory {
 
 		String startQuary = "UPDATE STOCK SET ITEM_QUANTITY = ITEM_QUANTITY - ";
 
-		String endQuary = " WHERE ITEM_NUMBER='?'";
+		String endQuary = " WHERE ITEM_NUMBER = ?";
 
 		sb.append(startQuary);
 		sb.append(vendingConstant.ONE);
@@ -74,26 +76,24 @@ public class vendingInventory {
 	}
 
 	public String quaryConditionProcess() {
-		
+
 		StringBuilder sb = new StringBuilder();
 
 		String startQuary = "SELECT CASE WHEN ITEM_QUANTITY <= ";
-		String middle1 = " THEN ";
-		String middle2 = " ELSE ";
-		String endQuary = " END AS SOLDOUTPLAG FROM STOCK WHERE ITEM_NUMBER='?'";
+		String middleQuary1 = " THEN '";
+		String middleQuary2 = "' ELSE '";
+		String endQuary = "' END AS SOLDOUTFLAG FROM STOCK WHERE ITEM_NUMBER = ?";
 
 		sb.append(startQuary);
 		sb.append(vendingConstant.ZERO);
-		sb.append(middle1);
-		sb.append(vendingConstant.ONE);
-		sb.append(middle2);
-		sb.append(vendingConstant.ZERO);
+		sb.append(middleQuary1);
+		sb.append(vendingConstant.SOLDOUT);
+		sb.append(middleQuary2);
+		sb.append(vendingConstant.BLANK);
 		sb.append(endQuary);
-		
+
 		return sb.toString();
 
 	}
-	
-	
-	
+
 }
