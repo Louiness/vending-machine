@@ -9,7 +9,7 @@ public class connection {
     public static Connection getConnection() {
         Connection conn = null;
         try {
-            String user = "scott";
+            String user = "c##scott";
             String pw = "4568";
             String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 
