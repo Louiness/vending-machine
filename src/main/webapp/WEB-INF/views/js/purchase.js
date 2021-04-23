@@ -18,17 +18,10 @@ function init() {
                   const response = JSON.parse(this.responseText);
 
                   //データが正常
-                  if(response.soldOutFlag){
-                    if(response.soldOutFlag){
+                  if(response.soldOutFlag === 'soldout'){
 
-                      productStateDiv.style.backgroundColor = "red";
-                      soldOutFlagDiv.setAttribute("value", response.soldOutFlag);
-                    }
-                  }
-                  //データ通信エラー
-                  else{
-                    alert('演算途中にエラーが発生しました。');
-                    return false;
+                    productStateDiv.style.backgroundColor = "red";
+                    soldOutFlagDiv.setAttribute("value", response.soldOutFlag);
                   }
                 }
               }
