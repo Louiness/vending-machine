@@ -27,7 +27,7 @@ public class indexController {
 	@RequestMapping(value = "/purchase", method = RequestMethod.GET)
 	public @ResponseBody HashMap<String, Boolean> getSoldOutFlag(String productNumber) {
 			HashMap<String, Boolean> dataMap = new HashMap<>();
-			dataMap.put("soldOutFlag", false);
+			dataMap.put("soldOutFlag", true);
 
 			return dataMap;
 	}

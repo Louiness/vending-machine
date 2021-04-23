@@ -16,11 +16,11 @@
       <div class="display-board">
         <div class="items">
           <c:forEach var="item" items="${list}" varStatus="stat">
-            <div class="item${stat.index}">
+            <div class="item${stat.index+1}">
               <img src="${item.itemImage}" alt="" srcset="">
               <div class="purchase-button">
-                <div class="product-state">
-                  <input type="hidden" class="sold-out-flag" value="${item.soldOutPlag}"/>
+                <div class="${item.itemNumber} product-state">
+                  <input type="hidden" class="${item.itemNumber} sold-out-flag" value="${item.soldOutFlag}" />
                 </div>
                 <div class="product-info">
                   <span id="${item.itemNumber}" class="price">${item.price}</span>

@@ -20,7 +20,7 @@ public class vendingList {
 
         try {
 
-            String quary = "SELECT A.ITEM_NUMBER, B.PRICE, B.ITEM_IMAGE,CASE WHEN ITEM_QUANTITY <= 0 THEN '1' ELSE '0' END AS SOLDOUTPLAG FROM STOCK A INNER JOIN PRODUCT_INFOMATION B ON (A.ITEM_NUMBER = B.ITEM_NUMBER)";
+            String quary = "SELECT A.ITEM_NUMBER, B.PRICE, B.ITEM_IMAGE, A.ITEM_QUANTITY, CASE WHEN ITEM_QUANTITY <= 0 THEN 'soldout' ELSE '' END AS SOLDOUTFLAG FROM STOCK A INNER JOIN PRODUCT_INFOMATION B ON (A.ITEM_NUMBER = B.ITEM_NUMBER)";
 
             conn = connection.getConnection();
 
@@ -33,8 +33,9 @@ public class vendingList {
                 String itemNumber = rs.getString("ITEM_NUMBER");
                 int price = rs.getInt("PRICE");
                 String itemImage = rs.getString("ITEM_IMAGE");
-                Boolean soldOutPlag = rs.getBoolean("SOLDOUTPLAG");
-                vendingList.add(new vendingVO(itemNumber, price, itemImage, soldOutPlag));
+                int itemQuantity = rs.getInt("ITEM_QUANTITY");
+                String soldOutFlag = rs.getString("SOLDOUTFLAG");
+                vendingList.add(new vendingVO(itemNumber, price, itemImage, soldOutFlag));
 
             }
             return vendingList;
