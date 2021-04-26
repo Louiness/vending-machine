@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 import com.vending.common.vendingConstant;
 
@@ -27,8 +28,10 @@ public class vendingInventory {
 	 * @param　String productNumber（製品情報）
 	 * @return　soldOutFlag(売り切れプラグ)
 	 */
-	public String getInventory(String productNumber) {
+	public HashMap<String, String> getInventory(String productNumber) {
 
+		HashMap<String, String> dataMap = new HashMap<>();
+		
 		try {
 
 			String quary = quaryUpdateProcess();
@@ -37,15 +40,19 @@ public class vendingInventory {
 			conn = connection.getConnection();
 			pstm = conn.prepareStatement(quary);
 			pstm.setString(1, productNumber);
-			pstm.executeUpdate();
+			if(pstm.executeUpdate() != vendingConstant.SUCCESS) {
+				dataMap.put("state", "fail");
+				return dataMap;
+			}
 
+			dataMap.put("state", "success");
 			quary = quaryConditionProcess();
 			pstm = conn.prepareStatement(quary);
 			pstm.setString(1, productNumber);
 			rs = pstm.executeQuery();
 
 			while (rs.next()) {
-				soldOutFlag = rs.getString("SOLDOUTFLAG");
+				dataMap.put("soldOutFlag", rs.getString("SOLDOUTFLAG"));
 			}
 
 		} catch (SQLException sqle) {
@@ -67,7 +74,7 @@ public class vendingInventory {
 			}
 		}
 
-		return soldOutFlag;
+		return dataMap;
 
 	}
 

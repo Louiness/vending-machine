@@ -33,7 +33,7 @@ public class vendingDao {
 
 		try {
 
-			String quary = quaryConditionProcess();
+			String quary = quaryJoinProcess();
 			vendingConnection connection = new vendingConnection();
 			
 			conn = connection.getConnection();
@@ -76,7 +76,7 @@ public class vendingDao {
 	 * @param　なし
 	 * @return　sb.toString(SQL構文)
 	 */
-	public String quaryConditionProcess() {
+	public String quaryJoinProcess() {
 		
 		StringBuilder sb = new StringBuilder();
 

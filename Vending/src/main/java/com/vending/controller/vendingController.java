@@ -20,29 +20,29 @@ public class vendingController {
 	/**
 	 * 自動販売機初期画面
 	 * @param　Model model（モデル）
-	 * @return　index(index.jsp)
+	 * @return　CSI0101A(初期画面)
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String index(Model model) {
+	public String inti(Model model) {
 
 		vendingDao resultList = new vendingDao();
 		model.addAttribute("list", resultList.getvendingList());
 
-		return "index";
+		return "CSI0101A";
 	}
 	
 	/**
 	 * 自動販売機ボダンイベント
 	 * @param　String productNumber（製品情報）
-	 * @return　dataMap(売り切れプラグ)
+	 * @return　レスポンスマップ
 	 */
 	@RequestMapping(value = "/purchase", method = RequestMethod.GET)
 	public @ResponseBody HashMap<String, String> getSoldOutFlag(String productNumber) {
-			HashMap<String, String> dataMap = new HashMap<>();
-			vendingInventory inventory = new vendingInventory();
+		
+		vendingInventory inventory = new vendingInventory();
+		
+		HashMap<String, String> dataMap = inventory.getInventory(productNumber);
 			
-			dataMap.put("soldOutFlag", inventory.getInventory(productNumber));
-
 			return dataMap;
 	}
 	

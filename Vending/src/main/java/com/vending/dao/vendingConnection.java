@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * Oracle連結初期設定
+ * DBの連結初期設定
  * 
  * @author 林基文
  *
@@ -16,9 +16,9 @@ public class vendingConnection {
 	Connection conn;
 
 	/**
-	 * DBの連結設定を行う
+	 * コネクションの連結設定を行う
 	 * @param　なし
-	 * @return　conn(DB連結)
+	 * @return　conn(コネクション情報)
 	 */
 	public Connection getConnection() {
 
