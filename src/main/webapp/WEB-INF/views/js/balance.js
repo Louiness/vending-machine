@@ -1,41 +1,55 @@
 "use strict"
 
-// 동전 투입구
-let coinInsert = document.getElementsByClassName("coin-insert")[0];
-coinInsert.addEventListener("click", () => {
-    
-});
-// 자판기 내에 존재하는 잔액
-let balance = document.getElementsByClassName("balance").innerText;
+let change = ZERO;
 
-function init() {
-    //투입 금액
-    let coins = document.getElementsByClassName("coin");
+function init(){
+    const changeButton = document.getElementById("getChangeBtn");
+    changeButton.addEventListener("click", getChange);
 
-    for(let coin of coins){
-        coin.addEventListener("click", () => {
-            let balanceElement = document.getElementById("balance");
-            if(balance === undefined){
-                balance = ZERO;
-            }
-            else{
-                
-            }
-            // 투입한 금액
-            let coinValue = Number(coin.getAttribute("id").replace("yen", ""));
-            
-            balance = addBalance(coinValue);
-            balanceElement.innerText = balance;
-        });
-    }
+    const coinChanger = document.getElementById("coin-changer");
+    coinChanger.addEventListener("click", returnBalance);
+
+    let coinReturn = document.getElementById("coin-return");
+    let closeButton = document.getElementById("close-change-popup");
+    coinReturn.addEventListener("click", changePopupToggle);
+    closeButton.addEventListener("click", changePopupToggle);
 }
-
 
 function addBalance(coinValue){
     return balance + coinValue;
 }
 function decBalance(productPrice){
-    return balnce - productPrice;
+    return balance - productPrice;
+}
+function changePopupToggle(){
+    let popup = document.getElementById('change-popup');
+    popup.classList.toggle('active');
+}
+function returnBalance(){
+    if(balance <= ZERO || balance === undefined){
+        alert("반환가능한 잔액이 남아있지 않습니다.");
+    }
+    else{
+        change = balance;
+        balance = ZERO;
+        displayBalance(balance);
+
+        let comment = document.getElementById("comment");
+        comment.innerText = `${change}${RETURN_CHANGE_COMMENT}`;
+    }
+}
+function getChange(){
+    let comment = document.getElementById("comment");
+    const changeButton = document.getElementById("getChangeBtn");
+
+    if(change <= ZERO){
+        comment.innerText = `${CANT_GET_CHANGE_COMMENT}`;
+    }
+    else{
+        comment.innerText = `${GET_CHANGE_COMMENT}`;
+        changeButton.classList.toggle('active');
+        change = 0;
+    }
 }
 
 init();
