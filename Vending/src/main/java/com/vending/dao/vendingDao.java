@@ -9,26 +9,35 @@ import java.util.List;
 import com.vending.common.vendingConstant;
 import com.vending.vo.vendingVO;
 
+/**
+ * 製品情報リスト
+ * @author 林基文
+ *
+ */
 public class vendingDao {
-
+	// コネクション
 	Connection conn;
-
+	// ステートメント
 	PreparedStatement pstm;
-
+	// リザルト
 	ResultSet rs;
-
+	//　製品情報リスト
 	List<vendingVO> vendingList = new ArrayList<>();
 
+	/**
+	 * 製品情報リストを返還する処理を行う
+	 * @param　なし
+	 * @return　vendingList(製品情報リスト)
+	 */
 	public List<vendingVO> getvendingList() {
 
 		try {
 
 			String quary = quaryConditionProcess();
-
+			vendingConnection connection = new vendingConnection();
+			
 			conn = connection.getConnection();
-
 			pstm = conn.prepareStatement(quary);
-
 			rs = pstm.executeQuery();
 
 			while (rs.next()) {
@@ -40,7 +49,6 @@ public class vendingDao {
 				vendingList.add(new vendingVO(itemNumber, price, itemImage, soldOutFlag));
 
 			}
-			return vendingList;
 		} catch (Exception e) {
 			System.out.println("vendingList 에러 발생");
 		} finally {
@@ -63,6 +71,11 @@ public class vendingDao {
 		return vendingList;
 	}
 	
+	/**
+	 * SQL構文の結果を返還する処理を行う
+	 * @param　なし
+	 * @return　sb.toString(SQL構文)
+	 */
 	public String quaryConditionProcess() {
 		
 		StringBuilder sb = new StringBuilder();

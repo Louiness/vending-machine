@@ -4,10 +4,24 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class connection {
+/**
+ * Oracle連結初期設定
+ * 
+ * @author 林基文
+ *
+ */
+public class vendingConnection {
 
-	public static Connection getConnection() {
-		Connection conn = null;
+	// コネクション
+	Connection conn;
+
+	/**
+	 * DBの連結設定を行う
+	 * @param　なし
+	 * @return　conn(DB連結)
+	 */
+	public Connection getConnection() {
+
 		try {
 			String user = "scott";
 			String pw = "4568";

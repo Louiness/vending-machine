@@ -7,21 +7,33 @@ import java.sql.SQLException;
 
 import com.vending.common.vendingConstant;
 
+/**
+ * 在庫処理後存在有無
+ * @author 林基文
+ *
+ */
 public class vendingInventory {
-
+	// コネクション
 	Connection conn;
-
+	// ステートメント
 	PreparedStatement pstm;
-
+	// リザルト
 	ResultSet rs;
-
+	//　売り切れプラグ
+	String soldOutFlag;
+	
+	/**
+	 * 在庫数の処理を行う
+	 * @param　String productNumber（製品情報）
+	 * @return　soldOutFlag(売り切れプラグ)
+	 */
 	public String getInventory(String productNumber) {
-
-		String soldOutFlag = "";
 
 		try {
 
 			String quary = quaryUpdateProcess();
+			vendingConnection connection = new vendingConnection();
+			
 			conn = connection.getConnection();
 			pstm = conn.prepareStatement(quary);
 			pstm.setString(1, productNumber);
@@ -59,6 +71,11 @@ public class vendingInventory {
 
 	}
 
+	/**
+	 * 在庫数を処理するSQL構文を返還する
+	 * @param　なし
+	 * @return　sb.toString(SQL構文)
+	 */
 	public String quaryUpdateProcess() {
 
 		StringBuilder sb = new StringBuilder();
@@ -75,6 +92,11 @@ public class vendingInventory {
 
 	}
 
+	/**
+	 * 在庫数有無結果を処理するSQL構文を返還する
+	 * @param　なし
+	 * @return　sb.toString(SQL構文)
+	 */
 	public String quaryConditionProcess() {
 
 		StringBuilder sb = new StringBuilder();
