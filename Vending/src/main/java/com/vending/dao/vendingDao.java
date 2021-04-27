@@ -65,7 +65,7 @@ public class vendingDao {
 				}
 
 			} catch (Exception e) {
-
+				throw new RuntimeException(e.getMessage());
 			}
 		}
 		return vendingList;

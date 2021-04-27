@@ -1,6 +1,8 @@
 package com.vending.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vending.dao.vendingDao;
 import com.vending.dao.vendingInventory;
+import com.vending.vo.vendingVO;
 /**
  * 自動販売機コントロール
  * @author 林基文
@@ -23,10 +26,17 @@ public class vendingController {
 	 * @return　CSI0101A(初期画面)
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String inti(Model model) {
+	public String init(Model model) {
 
 		vendingDao resultList = new vendingDao();
-		model.addAttribute("list", resultList.getvendingList());
+		
+		List<vendingVO> vendingList = resultList.getvendingList();
+		
+		if(vendingList.isEmpty()) {
+			return "CSI0201E";
+		}
+		
+		model.addAttribute("list", vendingList);
 
 		return "CSI0101A";
 	}
@@ -39,10 +49,15 @@ public class vendingController {
 	@RequestMapping(value = "/purchase", method = RequestMethod.GET)
 	public @ResponseBody HashMap<String, String> getSoldOutFlag(String productNumber) {
 		
-		vendingInventory inventory = new vendingInventory();
+		HashMap<String, String> dataMap = new HashMap<>();
 		
-		HashMap<String, String> dataMap = inventory.getInventory(productNumber);
-			
+		if(productNumber.isEmpty()) {
+			dataMap.put("state", "fail");
+			dataMap.put("error", "ERRS0001");
+		} else {
+			vendingInventory inventory = new vendingInventory();
+			dataMap = inventory.getInventory(productNumber);
+		}
 			return dataMap;
 	}
 	

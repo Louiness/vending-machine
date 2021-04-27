@@ -42,6 +42,7 @@ public class vendingInventory {
 			pstm.setString(1, productNumber);
 			if(pstm.executeUpdate() != vendingConstant.SUCCESS) {
 				dataMap.put("state", "fail");
+				dataMap.put("error", "ERRS0002");
 				return dataMap;
 			}
 
@@ -55,8 +56,8 @@ public class vendingInventory {
 				dataMap.put("soldOutFlag", rs.getString("SOLDOUTFLAG"));
 			}
 
-		} catch (SQLException sqle) {
-			sqle.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		} finally {
 			// DB 연결을 종료한다.
 			try {
