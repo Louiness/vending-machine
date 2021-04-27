@@ -65,8 +65,8 @@
   </div>
   <div id="change-popup">
     <div class="content">
-      <span id="comment"></span>
-      <a id="getChangeBtn">거스름돈 챙기기</a>
+      <span id="comment">현재 반환된 거스름돈이 없습니다.</span>
+      <a id="getChangeBtn" class="active">거스름돈 챙기기</a>
       <a id="close-change-popup" class="close">
         <img src="image/close.png">
       </a>
