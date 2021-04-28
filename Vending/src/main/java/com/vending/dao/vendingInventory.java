@@ -3,7 +3,6 @@ package com.vending.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 
 import com.vending.common.vendingConstant;
@@ -28,11 +27,10 @@ public class vendingInventory {
 	 * @param　String productNumber（製品情報）
 	 * @return　soldOutFlag(売り切れプラグ)
 	 */
-	public HashMap<String, String> getInventory(String productNumber) {
+	public HashMap<String, String> getInventory(String productNumber) throws Exception{
 
 		HashMap<String, String> dataMap = new HashMap<>();
 		
-		try {
 
 			String quary = quaryUpdateProcess();
 			vendingConnection connection = new vendingConnection();
@@ -40,27 +38,22 @@ public class vendingInventory {
 			conn = connection.getConnection();
 			pstm = conn.prepareStatement(quary);
 			pstm.setString(1, productNumber);
-			if(pstm.executeUpdate() != vendingConstant.SUCCESS) {
-				dataMap.put("state", "fail");
-				dataMap.put("error", "ERRS0002");
+			if(pstm.executeUpdate() != vendingConstant.UPDATESUCCESS) {
+				dataMap.put(vendingConstant.STATE, vendingConstant.FAIL);
+				dataMap.put(vendingConstant.ERROR, vendingConstant.ERRS0002);
 				return dataMap;
 			}
 
-			dataMap.put("state", "success");
+			dataMap.put(vendingConstant.STATE, vendingConstant.SUCCESS);
 			quary = quaryConditionProcess();
 			pstm = conn.prepareStatement(quary);
 			pstm.setString(1, productNumber);
 			rs = pstm.executeQuery();
 
 			while (rs.next()) {
-				dataMap.put("soldOutFlag", rs.getString("SOLDOUTFLAG"));
+				dataMap.put(vendingConstant.SOLDOUTFLAG, rs.getString("SOLDOUTFLAG"));
 			}
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			// DB 연결을 종료한다.
-			try {
 				if (rs != null) {
 					rs.close();
 				}
@@ -70,10 +63,6 @@ public class vendingInventory {
 				if (conn != null) {
 					conn.close();
 				}
-			} catch (Exception e) {
-				throw new RuntimeException(e.getMessage());
-			}
-		}
 
 		return dataMap;
 

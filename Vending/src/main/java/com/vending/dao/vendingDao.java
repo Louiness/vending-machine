@@ -3,6 +3,7 @@ package com.vending.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,10 +29,10 @@ public class vendingDao {
 	 * 製品情報リストを返還する処理を行う
 	 * @param　なし
 	 * @return　vendingList(製品情報リスト)
+	 * @throws SQLException 
 	 */
-	public List<vendingVO> getvendingList() {
+	public List<vendingVO> getvendingList() throws Exception {
 
-		try {
 
 			String quary = quaryJoinProcess();
 			vendingConnection connection = new vendingConnection();
@@ -49,11 +50,7 @@ public class vendingDao {
 				vendingList.add(new vendingVO(itemNumber, price, itemImage, soldOutFlag));
 
 			}
-		} catch (Exception e) {
-			System.out.println("vendingList 에러 발생");
-		} finally {
 
-			try {
 				if (rs != null) {
 					rs.close();
 				}
@@ -64,10 +61,6 @@ public class vendingDao {
 					conn.close();
 				}
 
-			} catch (Exception e) {
-				throw new RuntimeException(e.getMessage());
-			}
-		}
 		return vendingList;
 	}
 	
@@ -85,7 +78,7 @@ public class vendingDao {
 		String middleQuary2 = " ELSE ";
 		String endQuary = " END AS SOLDOUTFLAG FROM STOCK A INNER JOIN PRODUCT_INFOMATION B ON (A.ITEM_NUMBER = B.ITEM_NUMBER)";
 
-		sb.append(startQuary);
+		sb.append(startQuary);	
 		sb.append(vendingConstant.ZERO);
 		sb.append(middleQuary1);
 		sb.append(vendingConstant.ONE);

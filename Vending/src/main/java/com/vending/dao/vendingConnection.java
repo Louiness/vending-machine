@@ -19,25 +19,18 @@ public class vendingConnection {
 	 * コネクションの連結設定を行う
 	 * @param　なし
 	 * @return　conn(コネクション情報)
+	 * @throws ClassNotFoundException 
+	 * @throws SQLException 
 	 */
-	public Connection getConnection() {
+	public Connection getConnection() throws Exception {
 
-		try {
-			String user = "scott";
-			String pw = "4568";
-			String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+		String user = "scott";
+		String pw = "4568";
+		String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection(url, user, pw);
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		conn = DriverManager.getConnection(url, user, pw);
 
-		} catch (ClassNotFoundException cnfe) {
-			System.out.println("DB 드라이버 로딩 실패 :" + cnfe.toString());
-		} catch (SQLException sqle) {
-			System.out.println("DB 접속실패 : " + sqle.toString());
-		} catch (Exception e) {
-			System.out.println("Unkonwn error");
-			e.printStackTrace();
-		}
 		return conn;
 	}
 }
