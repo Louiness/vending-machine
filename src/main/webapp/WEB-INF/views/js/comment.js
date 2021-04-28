@@ -1,7 +1,32 @@
 "use strict"
 
-const RETURN_CHANGE_COMMENT = "원의 거스름돈이 반환되었습니다.";
-const NOTHING_CHANGE_COMMENT = "반환가능한 잔액이 남아있지 않습니다.";
-const GET_CHANGE_COMMENT = "거스름돈을 챙겼습니다.";
-const CANT_GET_CHANGE_COMMENT = "현재 반환된 거스름돈이 없습니다.";
-const SOLD_OUT_MESSAGE = "매진입니다.";
+/**
+ * エラーメッセージ、画面に表示されるコメント
+ */
+
+// おつりが返却された時のコメント
+const RETURN_CHANGE_COMMENT = "円のおつりが返却されました。";
+
+// おつりを回収した時のコメント
+const GET_CHANGE_COMMENT = "おつりを回収しました。";
+
+// おつりを返却しなかった時のコメント
+const CANT_GET_CHANGE_COMMENT = "現在、返却されたおつりがありません。";
+
+// 通信エラー、処理エラー
+const ERRA0001 = "ERRA0001。システムエラーが発生しました。製造チームに相談してください。";
+
+// 製品の在庫がない場合
+const ERRB0001 = "ERRB0001。製品が売り切れです。";
+
+// 製品の金額より残額が少ない場合
+const ERRB0002 = "ERRB0002。製品を購入するほどの金額を投入していません。";
+
+// 返却できる残額が無い場合
+const ERRB0003 = "ERRB0003。返却できる残額が残っていません。";
+
+// 相関チェック(KSKM200301)を満たす場合
+const ERRS0001 = "ERRS0001。必須項目が存在しません。";
+
+//在庫数の引き算に失敗した場合
+const ERRS0002 = "ERRS0002。自動販売機更新が行っていません。";
